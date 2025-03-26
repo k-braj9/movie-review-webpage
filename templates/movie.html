@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='movie.css') }}">
+    <title>IMDB 2.0</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{url_for('posts')}}" class="navbar-item2">View many other Reviews</a>
+            <a href="/" class="logo">IMDB 2.0</a>
+            <a href="{{url_for('make_post')}}" class="navbar-item">Write your own Review</a>
+        </div>
+    </nav>
+    <div class="container">
+        <form method="POST">
+            <div class="search-bar">
+                <input type="text" name="movie_name" placeholder="Enter a movie name..." required class="search-input">
+                <button type="submit" class="search-button">Search</button>
+            </div>
+        </form> 
+        {% if title %}
+            <div class="movie-details">
+                <div class="movie-poster">
+                  <img src="{{ Poster }}" alt="{{ title }}" class="movie-poster1">
+                    <h2 class="movie-title">{{ title }}</h2>
+                </div>
+                <div class="movie-info">
+                    <p>Rated: {{ rating }}</p>
+                    <p>Release Date: {{ release_date }}</p>
+                    <p>Director: {{ director }}</p>
+                    <p>Actors: {{ actors }}</p>
+                    <p>IMDB Rating: {{ imdbRating }}</p>
+                    <p>Genre: {{ Genre }}</p>
+                    <p>Writer(s): {{ Writers }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

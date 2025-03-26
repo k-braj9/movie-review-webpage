@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='make_post.css') }}">
+    <title>Posts</title>
+
+</head>
+
+
+
+<body>
+    <form method="POST" action="{{ url_for('make_post') }}">
+        {{ form.hidden_tag() }}
+        <fieldset class="field-size">
+            <legend class="Title">Write your own Movie Review</legend>
+            <a href="{{url_for('index')}}" class="logo">IMDB 2.0</a>
+            <div class="movie-input">
+                {{ form.title.label }}
+                {{ form.title(class="title-input") }}
+            </div>
+            <div class="content">
+                {{ form.content.label }}
+                {{ form.content(class="content-input") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="submit-1") }}
+            </div>
+          </fieldset>
+    </form>
+</div>
+</body>
+</html>

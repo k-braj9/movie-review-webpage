@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head=
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
+    <title>Posts</title>
+</head>
+<body>
+    <a href="{{url_for('index')}}" class="logo">IMDB 2.0</a>
+    <h1>Posts</h1>
+    <div id="posts">
+    <a href="{{url_for('make_post')}}">Write your own Review!</a>
+    {% for post in posts %}
+        <div class="post">
+            <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+            <br/>
+            <a href="{{ url_for('delete_post', id = post.id)}}" class="link1">Delete Post</a>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
