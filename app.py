@@ -5,7 +5,6 @@ from wtforms.validators import DataRequired
 from wtforms import StringField, TextAreaField, SubmitField
 from dotenv import load_dotenv
 import requests
-import os
 
 app = Flask(__name__)
 app.secret_key = 'Kaushal_Raju'
