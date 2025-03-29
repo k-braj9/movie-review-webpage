@@ -8,13 +8,16 @@ import requests
 import os
 
 app = Flask(__name__)
-os.getenv('app.secret_key')
+app.secret_key = 'Kaushal_Raju'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-db = SQLAlchemy(app) 
+app.config['SECRET_KEY'] = 'k-raj_sql'
+db = SQLAlchemy(app)
+api_key = '25c22997' 
 
-def configure():
-    load_dotenv()
+app.secret_key = 'Kaushal_Raju'
+api_key = '25c22997'
+SECRET_KEY = 'k-raj_sql'
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,11 +26,11 @@ class Post(db.Model):
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    review = TextAreaField('review', validators=[DataRequired()])
+    review = TextAreaField('Review', validators=[DataRequired()])
     submit = SubmitField('Post')
 
 def get_movie(movie_name):
-    movie_data = requests.get(f'http://www.omdbapi.com/?t={movie_name}&apikey={os.getenv('api_key')}')
+    movie_data = requests.get(f'http://www.omdbapi.com/?t={movie_name}&apikey={'api_key'}')
     response = movie_data.json()
     if response.get("Response") == "True":
         return response.get("Title"), response.get("Released"), response.get("Rated"), response.get('Director'), response.get('Actors'), response.get('imdbRating'), response.get('Genre'), response.get('Writer'), response.get('Poster')
