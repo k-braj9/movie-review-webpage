@@ -28,14 +28,14 @@ input.title-input {
     width: 300px;
 }
 
-.content {
+.review {
     text-align: center;
     margin-top: 100px;
     font-size: 2rem;
     margin-right: 55px;
 }
 
-textarea.content-input {
+textarea.review-input {
     font-size: 1.5rem;
     padding: 15px;
     width: 300px;

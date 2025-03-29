@@ -19,11 +19,11 @@ def configure():
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    review = db.Column(db.Text, nullable=False)
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
+    review = TextAreaField('review', validators=[DataRequired()])
     submit = SubmitField('Post')
 
 def get_movie(movie_name):
@@ -56,7 +56,7 @@ def make_post():
     form = PostForm()
     post = None
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data)
+        post = Post(title=form.title.data, review=form.review.data)
         db.session.add(post)
         db.session.commit()
         print('Hi')
@@ -72,16 +72,16 @@ def delete_post(id):
         db.session.delete(post_to_delete)
         db.session.commit()
         posts = Post.query.all()
-        return render_template('posts.html', posts = posts, title=Post.title, content=Post.content)
+        return render_template('posts.html', posts = posts, title=Post.title, review=Post.review)
     except:
         posts = Post.query.all()
-        return render_template('posts.html', posts = posts, title=Post.title, content=Post.content)
+        return render_template('posts.html', posts = posts, title=Post.title, review=Post.review)
 
 
 @app.route("/posts")
 def posts():
     posts = Post.query.all()
-    return render_template('posts.html', posts = posts, title=Post.title, content=Post.content)
+    return render_template('posts.html', posts = posts, title=Post.title, review=Post.review)
 
 if __name__ == "__main__":
     with app.app_context():
