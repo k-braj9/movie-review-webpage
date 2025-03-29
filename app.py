@@ -54,37 +54,37 @@ def index():
     return render_template("movie.html", title=title, release_date=release_date, rating=rating, director=director, actors=actors, imdbRating=imdbRating, Genre=Genre, Writers=Writers, Poster=Poster)
 
 
-@app.route("/make-post", methods=['GET', 'POST'])
-def make_post():
+@app.route("/make-review", methods=['GET', 'POST'])
+def make_review():
     form = PostForm()
-    post = None
+    review = None
     if form.validate_on_submit():
-        post = Post(title=form.title.data, review=form.review.data)
-        db.session.add(post)
+        review = Post(title=form.title.data, review=form.review.data)
+        db.session.add(review)
         db.session.commit()
         print('Hi')
-        return redirect(url_for('posts'))
+        return redirect(url_for('reviews'))
     else:
         print('No')
-    return render_template('make_post.html', form=form, post=post)
+    return render_template('make_review.html', form=form, review=review)
 
-@app.route('/posts/delete/<int:id>')
-def delete_post(id):
-    post_to_delete = Post.query.get_or_404(id)
+@app.route('/reviews/delete/<int:id>')
+def delete_review(id):
+    review_delete = Post.query.get_or_404(id)
     try: 
-        db.session.delete(post_to_delete)
+        db.session.delete(review_delete)
         db.session.commit()
-        posts = Post.query.all()
-        return render_template('posts.html', posts = posts, title=Post.title, review=Post.review)
+        reviews = Post.query.all()
+        return render_template('reviews.html', reviews = reviews, title=Post.title, review=Post.review)
     except:
-        posts = Post.query.all()
-        return render_template('posts.html', posts = posts, title=Post.title, review=Post.review)
+        reviews = Post.query.all()
+        return render_template('reviews.html', reviews = reviews, title=Post.title, review=Post.review)
 
 
-@app.route("/posts")
-def posts():
-    posts = Post.query.all()
-    return render_template('posts.html', posts = posts, title=Post.title, review=Post.review)
+@app.route("/reviews")
+def reviews():
+    reviews = Post.query.all()
+    return render_template('reviews.html', reviews = reviews, title=Post.title, review=Post.review)
 
 if __name__ == "__main__":
     with app.app_context():
