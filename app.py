@@ -7,7 +7,7 @@ import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = 'SECRET_KEY'
 db = SQLAlchemy(app)  
 api_key = '25c22997'
 SECRET_KEY = 'k-raj_sql'
