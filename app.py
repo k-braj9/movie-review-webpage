@@ -3,20 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
 from wtforms import StringField, TextAreaField, SubmitField
-from dotenv import load_dotenv
 import requests
 
 app = Flask(__name__)
-app.secret_key = 'Kaushal_Raju'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'k-raj_sql'
-db = SQLAlchemy(app)
-api_key = '25c22997' 
-
-app.secret_key = 'Kaushal_Raju'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+db = SQLAlchemy(app)  
 api_key = '25c22997'
 SECRET_KEY = 'k-raj_sql'
-
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
