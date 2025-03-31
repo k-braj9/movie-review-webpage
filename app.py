@@ -4,13 +4,13 @@ from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
 from wtforms import StringField, TextAreaField, SubmitField
 import requests
+import key_file
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'SECRET_KEY'
-db = SQLAlchemy(app)  
-api_key = '25c22997'
-SECRET_KEY = 'k-raj_sql'
+db = SQLAlchemy(app)
+key_file.SECRET_KEY  
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,7 +23,7 @@ class PostForm(FlaskForm):
     submit = SubmitField('Post')
 
 def get_movie(movie_name):
-    movie_data = requests.get(f'http://www.omdbapi.com/?t={movie_name}&apikey={'api_key'}')
+    movie_data = requests.get(f'http://www.omdbapi.com/?t={movie_name}&apikey={key_file.api_key}')
     response = movie_data.json()
     if response.get("Response") == "True":
         return response.get("Title"), response.get("Released"), response.get("Rated"), response.get('Director'), response.get('Actors'), response.get('imdbRating'), response.get('Genre'), response.get('Writer'), response.get('Poster')
